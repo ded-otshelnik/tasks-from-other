@@ -1,6 +1,6 @@
-package List_Unique;
+import java.util.Iterator;
 
-class List {
+class List implements Iterable<Integer>{
     Node front;
     Node end;
     class Node {
@@ -9,10 +9,6 @@ class List {
         public Node(int value){
             this.value=value;
             next=null;
-        }
-        public Node(Node node){
-            this.value=node.value;
-            this.next=node.next;
         }
     }
     public List(){
@@ -30,31 +26,31 @@ class List {
         end=end.next;
     }
     public void remove(){
-        Node curr=front;
         if(front.next==null && end.next==null){
             front=null;
             end=null;
             return;
         }
-        while(curr.next!=end){
-            curr=curr.next;
+        Node temp=front;
+        while(temp.next!=end){
+            temp=temp.next;
         }
-        curr.next=null;
-        end=curr;
+        temp.next=null;
+        end=temp;
     };
     public boolean removeAt(int value){
-        Node curr=front;
-        while(curr.next.value!=value && curr!=null){
-            curr=curr.next;
+        Node temp=front;
+        while(temp.next.value!=value && temp!=null){
+            temp=temp.next;
         }
-        if(curr==null){
+        if(temp==null){
             return false;
         }
-        Node removed = curr.next;
-        curr.next=removed.next;
+        Node removed = temp.next;
+        temp.next=removed.next;
         return true;
     };
-    public String show(){
+    public String toString(){
         Node curr=front;
         StringBuilder result=new StringBuilder("");
         while(curr!=null){
@@ -87,6 +83,27 @@ class List {
             curr=curr.next;
         }
         return false;
+    }
+    public ListIterator iterator(){
+        return new ListIterator();
+    }
+
+    class ListIterator implements Iterator<Integer>{
+        Node curr;
+        public ListIterator(){
+            curr=front;
+        }
+        @Override
+        public Integer next(){
+            Node result=curr;
+            curr=curr.next;
+            return result.value;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return curr!=null;
+        }
     }
 
 }

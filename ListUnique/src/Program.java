@@ -1,5 +1,3 @@
-package List_Unique;
-
 import java.io.*;
 import java.util.*;
 
@@ -23,12 +21,13 @@ public class Program {
                 }
                 case 2: {
                     boolean condition=false;
-                    System.out.println("\n\nВвод значений списка.");
+                    System.out.println("\nВвод значений списка.");
                     while(!condition){
-                        System.out.print("Введите число:");
-                        list.add(in.nextInt());
-                        System.out.print("Продолжить(да/нет):");
-                        if(in.next().compareTo("нет")==0){
+                        System.out.print("Введите число(q для окончания):");
+                        if(in.hasNextInt()){
+                            list.add(in.nextInt());
+                        }
+                        else{
                             condition=true;
                         }
                     }
@@ -40,13 +39,19 @@ public class Program {
                     break;
                 }
             }
-            System.out.println("Список изначальный:\n"+list.show());
+            System.out.println("Список изначальный:");
+            for(var i:list){
+                System.out.print(i+" ");
+            }
             List uniqueList=list.unique();
-            System.out.println("Список уникальных элементов:\n"+uniqueList.show());
+            System.out.println("\n\nСписок уникальных элементов:");
+            for(var i:uniqueList){
+                System.out.print(i+" ");
+            }
         }
     }
     public static Integer[] readFromFile() throws IOException {
-        Scanner in = new Scanner(new File("List_Unique/example.txt"));
+        Scanner in = new Scanner(new File("src/example.txt"));
         ArrayList<Integer> temp=new ArrayList<Integer>();
         while(in.hasNextInt()){
             temp.add(in.nextInt());
