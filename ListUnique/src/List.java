@@ -10,6 +10,10 @@ class List {
             this.value=value;
             next=null;
         }
+        public Node(Node node){
+            this.value=node.value;
+            this.next=node.next;
+        }
     }
     public List(){
         front=null;
@@ -17,11 +21,21 @@ class List {
     }
     public void add(int value){
         Node temp = new Node(value);
+        if(front==null && end==null){
+            front=temp;
+            end=temp;
+            return;
+        }
         end.next=temp;
-        end=temp;
+        end=end.next;
     }
     public void remove(){
         Node curr=front;
+        if(front.next==null && end.next==null){
+            front=null;
+            end=null;
+            return;
+        }
         while(curr.next!=end){
             curr=curr.next;
         }
@@ -43,7 +57,7 @@ class List {
     public String show(){
         Node curr=front;
         StringBuilder result=new StringBuilder("");
-        while(curr.next!=null){
+        while(curr!=null){
             result.append(curr.value+"\n");
             curr=curr.next;
         }
@@ -52,7 +66,7 @@ class List {
     public List unique(){
         List result=new List();
         Node curr=front;
-        while(curr.next!=null){
+        while(curr!=null){
             if(!result.contains(curr.value)){
                 result.add(curr.value);
             }
@@ -63,7 +77,10 @@ class List {
     private boolean contains(int value)
     {
         Node curr=front;
-        while(curr.next!=null){
+        if(curr==null){
+            return false;
+        }
+        while(curr!=null){
             if(curr.value==value){
                 return true;
             }
