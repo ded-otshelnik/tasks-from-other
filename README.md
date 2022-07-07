@@ -4,6 +4,6 @@ tasks-from-other is a repository, which contains tasks in different programming 
 ## installation 
 git clone https://github.com/ded-otshelnik/tasks-from-other
 
-###Programming languages
+##Programming languages
 * C++
 * Java
